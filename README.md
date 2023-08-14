@@ -1,7 +1,5 @@
 > **Autor** >> Lucas Manoguerra
-<br>
 > **Porfolio** >> https://rocketdev.vercel.app
-<br>
 > **LinkedIn** >> https://www.linkedin.com/in/lucas-r-manoguerra/
 
 # Chat web app
