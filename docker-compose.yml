@@ -1,1 +1,51 @@
-# levantar los dos repositorios 
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    container_name: my-postgres
+    environment:
+      POSTGRES_DB: root
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+
+  backend:
+    container_name: my-backend
+    image: my-backend:0.0.1
+    build:
+      context: ./backend-chat-app
+      # dockerfile: my-backend
+
+    volumes:
+      - ./backend-chat-app:/back
+
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+
+
+  frontend:
+    container_name: my-frontend
+    image: my-frontend:0.0.1
+    build:
+      context: ./client-chat-app
+      # dockerfile: my-frontend
+
+    volumes:
+      - ./client-chat-app:/client
+
+    ports:
+      - "5173:5173"
+    depends_on:
+      - postgres
+      - backend
+
+
+volumes:
+  postgres-data: {}
